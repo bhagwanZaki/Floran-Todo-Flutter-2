@@ -102,8 +102,14 @@ class _ProfilePageState extends State<ProfilePage> {
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              chart(context, snapshot.data!.data.cdate,
-                                  snapshot.data!.data.cdata),
+                              snapshot.data!.data.numberOfTaskDone == 0
+                                  ? const Center(
+                                      child: Text(
+                                      "No data to track",
+                                      style: TextStyle(fontSize: 15),
+                                    ))
+                                  : chart(context, snapshot.data!.data.cdate,
+                                      snapshot.data!.data.cdata),
                               const SizedBox(
                                 height: 15,
                               ),
@@ -117,12 +123,12 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: Text(snapshot.data!.msg),
                           );
                         default:
-                          return Center(
+                          return const Center(
                             child: Text("Something broke dont know 2"),
                           );
                       }
                     }
-                    return Center(
+                    return const Center(
                       child: Text("Something broke"),
                     );
                   })

@@ -39,9 +39,7 @@ class TodoBloc {
     _deletecontroller = StreamController<TodoResponse<dynamic>>();
     _repository = TodoRepository();
 
-    var dateParse = DateTime.now();
-    var formattedDate = "${dateParse.year}-${dateParse.month}-${dateParse.day}";
-    getTodo(formattedDate);
+    
   }
 
   // fetch todo

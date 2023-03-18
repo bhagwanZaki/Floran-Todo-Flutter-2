@@ -3,6 +3,7 @@ import 'package:floran_todo/constant/Routes.dart';
 import 'package:floran_todo/constant/colors.dart';
 import 'package:floran_todo/model/todo/todoModel.dart';
 import 'package:floran_todo/response/todo_response.dart';
+import 'package:floran_todo/utils/preferences.dart';
 import 'package:floran_todo/widget/task_item.dart';
 import 'package:floran_todo/widget/task_list.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,6 +19,8 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  Preference prefs = Preference();
+
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime _selectedDay = DateTime.now();
@@ -26,11 +29,22 @@ class _MainScreenState extends State<MainScreen> {
       "${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}";
   TodoBloc? _bloc;
   List<TodoModel>? todoList = [];
+  String? username;
+
+  Future<void> getUsername() async {
+    var temp = await prefs.getUsername();
+    setState(() {
+      username = temp;
+    });
+  }
 
   @override
   void initState() {
+    getUsername();
     _bloc = TodoBloc();
-
+    var dateParse = DateTime.now();
+    var formattedDate = "${dateParse.year}-${dateParse.month}-${dateParse.day}";
+    _bloc?.getTodo(formattedDate);
     super.initState();
   }
 
@@ -46,11 +60,14 @@ class _MainScreenState extends State<MainScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "Hello Claro",
-                    style: TextStyle(
-                        fontSize: 31,
-                        color: Theme.of(context).textTheme.displayLarge?.color),
+                  Expanded(
+                    child: Text(
+                      "Hello $username,",
+                      style: TextStyle(
+                          fontSize: 31,
+                          color:
+                              Theme.of(context).textTheme.displayLarge?.color),
+                    ),
                   ),
                   MaterialButton(
                       onPressed: () =>
@@ -60,7 +77,10 @@ class _MainScreenState extends State<MainScreen> {
                               Brightness.dark
                           ? AppColors.yellow
                           : AppColors.mediumGreen,
-                      child: const Icon(CupertinoIcons.person_fill))
+                      child: const Icon(
+                        CupertinoIcons.person_fill,
+                        color: Colors.black,
+                      ))
                 ],
               ),
               calendar(),
@@ -81,7 +101,10 @@ class _MainScreenState extends State<MainScreen> {
                               Brightness.dark
                           ? AppColors.yellow
                           : AppColors.mediumGreen,
-                      child: const Icon(CupertinoIcons.plus))
+                      child: const Icon(
+                        CupertinoIcons.plus,
+                        color: Colors.black,
+                      ))
                 ],
               ),
               StreamBuilder<TodoResponse<List<TodoModel>>>(

@@ -46,7 +46,7 @@ class _TaskListState extends State<TaskList> {
                 widget.todoList![index],
                 DateTime.parse(widget.todoList![index].date_completed_by)
                             .compareTo(DateTime.parse(
-                                "${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}")) ==
+                                "${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day > 0 ? "0${DateTime.now().day}" : DateTime.now().day}")) ==
                         -1
                     ? true
                     : false);
@@ -116,7 +116,7 @@ class _TaskListState extends State<TaskList> {
                 isDealyed: DateTime.parse(
                                 widget.todoList![index].date_completed_by)
                             .compareTo(DateTime.parse(
-                                "${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day > 0 ? "0${DateTime.now().day}" : DateTime.now().day}")) ==
+                                "${DateTime.now().year}-${DateTime.now().month < 10 ? "0${DateTime.now().month}" : DateTime.now().month}-${DateTime.now().day < 10 ? "0${DateTime.now().day}" : DateTime.now().day}")) ==
                         -1
                     ? true
                     : false,
