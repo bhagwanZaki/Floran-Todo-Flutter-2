@@ -120,7 +120,6 @@ class _TaskItemState extends State<TaskItem> {
           shape: const CircleBorder(),
           side: BorderSide(color: AppColors.white, width: 2),
           onChanged: (v) {
-            print('click');
             _bloc?.completeTodo(widget.index, !_complete, DateTime.now());
           }),
     );

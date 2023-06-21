@@ -23,12 +23,9 @@ class TodoService {
           });
 
       var responseBody = _returnResponse(res);
-
       List<TodoModel> todoList = List.from(responseBody['todo'])
           .map((e) => TodoModel.fromMap(e))
           .toList();
-
-      print(todoList);
       return todoList;
     } on SocketException {
       throw FetchDataException("No Internet Connection");

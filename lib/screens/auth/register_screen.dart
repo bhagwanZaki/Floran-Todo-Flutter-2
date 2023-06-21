@@ -1,4 +1,3 @@
-import 'package:floran_todo/model/auth/authModel.dart';
 import 'package:floran_todo/model/auth/loginRegisterModel.dart';
 import 'package:floran_todo/response/auth_response.dart';
 import 'package:flutter/material.dart';

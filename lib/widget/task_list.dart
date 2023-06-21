@@ -46,7 +46,7 @@ class _TaskListState extends State<TaskList> {
                 widget.todoList![index],
                 DateTime.parse(widget.todoList![index].date_completed_by)
                             .compareTo(DateTime.parse(
-                                "${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day > 0 ? "0${DateTime.now().day}" : DateTime.now().day}")) ==
+                                "${DateTime.now().year}-${DateTime.now().month < 10 ? "0${DateTime.now().month}" : DateTime.now().month}-${DateTime.now().day < 10 ? "0${DateTime.now().day}" : DateTime.now().day}")) ==
                         -1
                     ? true
                     : false);
@@ -158,6 +158,10 @@ class _TaskListState extends State<TaskList> {
         builder: (BuildContext context) {
           return SingleChildScrollView(
             child: Container(
+              width: MediaQuery.of(context).size.width,
+              constraints: BoxConstraints(
+                minHeight: (MediaQuery.of(context).size.height / 2) + 100,
+              ),
               decoration: BoxDecoration(
                   color: AppColors.teaGreen,
                   borderRadius: const BorderRadius.only(
@@ -175,16 +179,6 @@ class _TaskListState extends State<TaskList> {
                   const SizedBox(
                     height: 10,
                   ),
-                  lable("Title"),
-                  detailValue(data.title),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  lable("Description"),
-                  detailValue(data.description),
-                  const SizedBox(
-                    height: 15,
-                  ),
                   data.completed == false
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,7 +193,17 @@ class _TaskListState extends State<TaskList> {
                             lable("Completed"),
                             detailValue("${data.completed_at}"),
                           ],
-                        )
+                        ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  lable("Title"),
+                  detailValue(data.title),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  lable("Description"),
+                  detailValue(data.description),
                 ],
               ),
             ),

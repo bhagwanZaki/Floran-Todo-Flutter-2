@@ -4,11 +4,9 @@ import 'package:floran_todo/constant/colors.dart';
 import 'package:floran_todo/model/todo/todoModel.dart';
 import 'package:floran_todo/response/todo_response.dart';
 import 'package:floran_todo/utils/preferences.dart';
-import 'package:floran_todo/widget/task_item.dart';
 import 'package:floran_todo/widget/task_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class MainScreen extends StatefulWidget {

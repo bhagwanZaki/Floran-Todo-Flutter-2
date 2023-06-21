@@ -276,7 +276,7 @@ class _ProfilePageState extends State<ProfilePage> {
       reverse: true,
       child: Container(
           height: 300,
-          width: (cdate.length + 100),
+          width: (cdate.length * 50),
           padding: const EdgeInsets.all(5),
           margin: const EdgeInsets.only(top: 20),
           child: BarChart(BarChartData(
